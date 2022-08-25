@@ -38,7 +38,7 @@ builder.mutationField('createTodo', (t) =>
 		},
 		resolve: (query, _root, { input }) => {
 			return {
-				id: '121313',
+				id: crypto.randomUUID(),
 				text: input.text,
 				done: false,
 				createdAt: new Date(),
