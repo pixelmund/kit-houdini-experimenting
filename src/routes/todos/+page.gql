@@ -1,0 +1,12 @@
+query Todos {
+	myTodos(first: 7, after: "") @paginate(name: "My_Todos"){
+		edges {
+			node {
+				id
+				text
+				done
+				createdAt
+			}
+		}
+	}
+}

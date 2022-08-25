@@ -1,3 +1,61 @@
+input CreateTodoInput {
+  text: String!
+}
+
+scalar DateTime
+
+type Mutation {
+  createTodo(input: CreateTodoInput!): Todo!
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
 type Query {
-  hello: String
+  myTodos(after: String, before: String, first: Int, last: Int): QueryMyTodosConnection!
+  node(id: ID!): Node
+  nodes(ids: [ID!]!): [Node]!
+}
+
+type QueryMyTodosConnection {
+  edges: [QueryMyTodosConnectionEdge]!
+  pageInfo: PageInfo!
+}
+
+type QueryMyTodosConnectionEdge {
+  cursor: String!
+  node: Todo!
+}
+
+type Todo implements Node {
+  createdAt: DateTime!
+  done: Boolean!
+  id: ID!
+  text: String!
+  user: User!
+}
+
+type User implements Node {
+  email: String!
+  id: ID!
+  todos(after: String, before: String, first: Int, last: Int): UserTodosConnection!
+  username: String!
+}
+
+type UserTodosConnection {
+  edges: [UserTodosConnectionEdge]!
+  pageInfo: PageInfo!
+}
+
+type UserTodosConnectionEdge {
+  cursor: String!
+  node: Todo!
 }

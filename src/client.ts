@@ -6,7 +6,7 @@ async function fetchQuery({
 	variables = {},
 	metadata
 }: RequestHandlerArgs) {
-	const url = import.meta.env.VITE_GRAPHQL_ENDPOINT || 'http://localhost:5173/graphql';
+	const url = import.meta.env.VITE_GRAPHQL_ENDPOINT || '/graphql';
 	const result = await fetch(url, {
 		method: 'POST',
 		headers: {
